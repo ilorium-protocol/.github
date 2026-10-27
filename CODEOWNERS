@@ -1,0 +1,5 @@
+# CODEOWNERS — interim governance (governance-v1.md, section 8).
+# The founder is the only Genome Custodian and reviews every change.
+# When two independent Custodians are in office, this line becomes
+# `* @ilorium-protocol/genome-custodians` and the ruleset moves to two approvals.
+*   @fseldon

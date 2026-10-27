@@ -1,0 +1,18 @@
+diff --git a/glossary.md b/glossary.md
+index 1111111..2222222 100644
+--- a/glossary.md
++++ b/glossary.md
+@@ -10,3 +10,4 @@
+ | **Organism** | An AI-run organization that carries the Ilorium Genome |
+ | **Vital Signs** | The current state of an organism in one view |
++| **Lighthouse** | The protocol's own machine-readable entry points at ilorium.com |
+ | **Evidence Bundle** | The evidence behind Vital Signs for a period |
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 3333333..4444444 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -1,2 +1,4 @@
+ # Changelog
+
++## Unreleased
++- glossary: add Lighthouse (editorial).

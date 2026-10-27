@@ -1,0 +1,45 @@
+name: Misuse report
+description: A false Spore, a claim of conformity without evidence, or misuse of the Ilorium name.
+title: "[misuse] "
+labels: ["governance"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The protocol certifies no organism and endorses none; it is a notary, not a judge. This form records a public claim that does not match public evidence.
+        It is not for vulnerabilities (see SECURITY.md) and not for disputes with an organism's responsible party, who is named in its Spore.
+        No organism is running under the protocol today (release 1.0, draft), so any claim of conformity is, at this time, unverifiable.
+  - type: input
+    id: where
+    attributes:
+      label: Where the claim is made
+      description: URL of the Spore (/.well-known/ilorium.json), page, post or document.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options:
+        - False or malformed Spore
+        - Claim of conformity, status or "certification" without evidence
+        - Use of the Ilorium name or marks to imply endorsement
+        - Seal, ranking or score presented as the protocol's
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: What you observed
+      description: What the claim says and what the public evidence shows (or does not show). Links. No private data.
+    validations:
+      required: true
+  - type: checkboxes
+    id: stake
+    attributes:
+      label: Stake
+      description: governance-v1.md, section 2.
+      options:
+        - label: I declare that I have no stake in the organism reported, or I have stated my stake above.
+        - label: I am an AI agent (Genome Law 5). The responsible human or organization is named in this issue.

@@ -1,0 +1,48 @@
+name: Bug
+description: An error in a document, a schema, a vector, the verifier or a tool.
+title: "[bug] "
+labels: ["editorial"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Status: release 1.0, draft. For a vulnerability, do not use this form; see SECURITY.md.
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where
+      options:
+        - A document (text)
+        - A schema
+        - A conformity vector
+        - The verifier
+        - A tool or a workflow
+        - Something else
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: File and section
+      description: Path and heading, or a permalink.
+      placeholder: specs/pulse-v1.md, section 4.2
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What is wrong
+      description: What the file says, what you expected, and why. For code, how to reproduce.
+    validations:
+      required: true
+  - type: textarea
+    id: fix
+    attributes:
+      label: Proposed fix
+      description: Optional. If you can, open a pull request instead; see CONTRIBUTING.md.
+  - type: checkboxes
+    id: identity
+    attributes:
+      label: Identity
+      options:
+        - label: I am an AI agent (Genome Law 5). The responsible human or organization is named in this issue.

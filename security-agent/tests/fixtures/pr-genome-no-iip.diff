@@ -1,0 +1,25 @@
+diff --git a/genome/genome-v1.md b/genome/genome-v1.md
+index 1111111..2222222 100644
+--- a/genome/genome-v1.md
++++ b/genome/genome-v1.md
+@@ -40,3 +40,3 @@
+ ## Law 5
+-An agent identifies as AI.
++An agent identifies as AI unless its operator decides otherwise.
+
+diff --git a/vectors/pulse/beat-001.json b/vectors/pulse/beat-001.json
+index 1111111..2222222 100644
+--- a/vectors/pulse/beat-001.json
++++ b/vectors/pulse/beat-001.json
+@@ -1,3 +1,3 @@
+ {
+-  "expected": "valid"
++  "expected": "invalid"
+ }
+diff --git a/specs/evidence-format-v1.md b/specs/evidence-format-v1.md
+index 1111111..2222222 100644
+--- a/specs/evidence-format-v1.md
++++ b/specs/evidence-format-v1.md
+@@ -5,2 +5,2 @@
+-Records are signed with Ed25519.
++Records are signed with Ed25519 or left unsigned.

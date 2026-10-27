@@ -1,0 +1,75 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright The Ilorium Authors
+#
+# Daily alert triage by ilorium-security-agent (AI).
+#
+# Reads Dependabot, code scanning and secret scanning alerts for every
+# repository of the organization and opens or updates one issue per alert
+# (label: security, agent-authored) with a proposed fix. It never dismisses an
+# alert, never changes a dependency, never changes a setting.
+#
+# Needs the App installed on the organization with: Dependabot alerts: read,
+# Code scanning alerts: read, Secret scanning alerts: read, Issues: write,
+# Metadata: read. Without SECURITY_AGENT_APP_ID the run prints "planned" and
+# exits 0: the workflow token of this repository cannot read other
+# repositories' alerts.
+
+name: security-agent-alerts
+
+on:
+  schedule:
+    - cron: "17 6 * * *"   # daily, 06:17 UTC
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: "Print what would be posted instead of posting."
+        type: boolean
+        default: false
+
+permissions: {}
+
+jobs:
+  alerts:
+    name: alerts
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the security agent
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Planned until the App is configured
+        if: ${{ vars.SECURITY_AGENT_APP_ID == '' }}
+        run: |
+          echo "planned: alert triage not configured (SECURITY_AGENT_APP_ID absent)"
+
+      - name: Agent identity (GitHub App token, organization-wide)
+        id: app-token
+        if: ${{ vars.SECURITY_AGENT_APP_ID != '' }}
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.SECURITY_AGENT_APP_ID }}
+          private-key: ${{ secrets.SECURITY_AGENT_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          permission-metadata: read
+          permission-issues: write
+          permission-vulnerability-alerts: read   # Dependabot alerts
+          permission-security-events: read
+          permission-secret-scanning-alerts: read
+
+      - name: Triage alerts
+        if: ${{ vars.SECURITY_AGENT_APP_ID != '' }}
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          DRY: ${{ inputs.dry-run && '--dry-run' || '' }}
+        run: |
+          # shellcheck disable=SC2086
+          python3 -I security-agent/alerts.py --org "${{ github.repository_owner }}" $DRY

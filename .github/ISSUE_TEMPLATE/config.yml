@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question
+    url: https://github.com/orgs/ilorium-protocol/discussions/categories/q-a
+    about: Questions about the protocol, the documents or how to adopt it go to Discussions, Q&A.
+  - name: Propose an idea
+    url: https://github.com/orgs/ilorium-protocol/discussions/categories/proposals
+    about: Ideas that are not yet a proposal. An IIP starts here.
+  - name: Report a vulnerability
+    url: https://github.com/ilorium-protocol/protocol/security/advisories/new
+    about: Private. Or email security@ilorium.com. Never a public issue. See SECURITY.md.

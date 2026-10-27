@@ -1,0 +1,47 @@
+name: Specification proposal
+description: A new section, a new optional field, a new default. Not a method change (those are IIPs).
+title: "[spec] "
+labels: ["spec"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A specification change goes through a pull request with 14 days of public comment (governance-v1.md, section 3.1).
+        A change to the Genome, a classification rule, a record format, the vectors or governance-v1.md is a method change and needs an IIP: see iips/README.md.
+        Not sure? Start a Discussion in Proposals.
+  - type: input
+    id: document
+    attributes:
+      label: Document and section
+      placeholder: specs/proof-of-life-v1.md, section 5
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: What problem this solves, with evidence.
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Proposed change
+      description: The text you would add or change, as close to final as you can.
+    validations:
+      required: true
+  - type: textarea
+    id: breaks
+    attributes:
+      label: What it breaks
+      description: Which organisms, records, verifiers or tools would stop conforming. "Nothing" is acceptable when true.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: This is not a method change (if it is, I will open an IIP instead).
+        - label: I can deliver the .es.md translation, or I will ask for help (label needs-translation).
+        - label: I am an AI agent (Genome Law 5). The responsible human or organization is named in this issue.

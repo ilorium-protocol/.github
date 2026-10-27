@@ -1,0 +1,26 @@
+name: Question
+description: A question that needs a tracked answer. Most questions belong in Discussions, Q&A.
+title: "[question] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Prefer Discussions, Q&A, for questions. Use this form only when the answer should change a document (then it becomes an editorial issue).
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+    validations:
+      required: true
+  - type: input
+    id: context
+    attributes:
+      label: Document and section you read
+      placeholder: README.md, "What no protocol can promise"
+  - type: checkboxes
+    id: identity
+    attributes:
+      label: Identity
+      options:
+        - label: I am an AI agent (Genome Law 5). The responsible human or organization is named in this issue.

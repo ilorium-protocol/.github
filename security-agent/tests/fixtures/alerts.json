@@ -1,0 +1,58 @@
+{
+  "protocol": {
+    "dependabot": [
+      {
+        "number": 7,
+        "state": "open",
+        "html_url": "https://github.com/ilorium-protocol/protocol/security/dependabot/7",
+        "dependency": {
+          "package": {"ecosystem": "pip", "name": "jsonschema"},
+          "manifest_path": "verifier/pyproject.toml"
+        },
+        "security_advisory": {
+          "ghsa_id": "GHSA-xxxx-yyyy-zzzz",
+          "cve_id": "CVE-2026-00001",
+          "summary": "Example advisory used only as a test fixture.",
+          "severity": "medium"
+        },
+        "security_vulnerability": {
+          "vulnerable_version_range": "< 4.23.1",
+          "first_patched_version": {"identifier": "4.23.1"}
+        }
+      }
+    ],
+    "code_scanning": [
+      {
+        "number": 3,
+        "state": "open",
+        "html_url": "https://github.com/ilorium-protocol/protocol/security/code-scanning/3",
+        "rule": {
+          "id": "py/clear-text-logging-sensitive-data",
+          "name": "Clear-text logging of sensitive information",
+          "severity": "error",
+          "security_severity_level": "high",
+          "description": "Sensitive information is logged in clear text."
+        },
+        "most_recent_instance": {
+          "location": {"path": "verifier/ilorium_verifier/log.py", "start_line": 42}
+        }
+      }
+    ],
+    "secret_scanning": [
+      {
+        "number": 1,
+        "state": "open",
+        "html_url": "https://github.com/ilorium-protocol/protocol/security/secret-scanning/1",
+        "secret_type": "github_personal_access_token",
+        "secret_type_display_name": "GitHub Personal Access Token",
+        "secret": "ghp_THIS_MUST_NEVER_APPEAR_IN_AN_ISSUE_0000000",
+        "locations_url": "https://api.github.com/repos/ilorium-protocol/protocol/secret-scanning/alerts/1/locations"
+      }
+    ]
+  },
+  "site": {
+    "dependabot": [],
+    "code_scanning": [],
+    "secret_scanning": []
+  }
+}

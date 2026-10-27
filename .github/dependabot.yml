@@ -1,0 +1,9 @@
+# Dependabot opens update pull requests for the workflows' actions. It never merges; a human does.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "editorial"

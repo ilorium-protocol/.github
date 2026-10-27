@@ -1,0 +1,15 @@
+Ilorium protocol, organization files and security agent
+Copyright The Ilorium Authors
+
+Code in this repository (security-agent/, workflows) is licensed under the
+Apache License, Version 2.0 (see LICENSE).
+
+Text (profile, policies) is licensed under the Creative Commons Attribution
+4.0 International license.
+
+The Code of Conduct is adapted from the Contributor Covenant, version 2.1,
+available at https://www.contributor-covenant.org/version/2/1/code_of_conduct/,
+licensed under CC BY 4.0.
+
+The security agent, ilorium-security-agent, is an AI agent (Genome Law 5).
+It reviews and proposes; it never decides.

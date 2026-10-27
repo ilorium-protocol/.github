@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright The Ilorium Authors
+#
+# Prompt-injection patterns for agent-readable files.
+# One Python regular expression per line. Lines starting with "#" are comments.
+# Matching is case-insensitive. Format: <id><TAB><regex>
+# Scope: files an agent reads (llms.txt, .well-known/*.json, Markdown docs,
+# issue and PR bodies). A hit is a finding, never a verdict.
+#
+# 1. Instruction override phrases
+ignore-previous	\bignore\s+(all\s+|any\s+|the\s+)?(previous|prior|above|earlier)\s+(instructions?|prompts?|rules?|messages?)
+disregard-instructions	\bdisregard\s+(all\s+|any\s+|the\s+|your\s+)?(previous|prior|above|earlier|system)?\s*(instructions?|prompts?|rules?|guidelines?)
+forget-instructions	\bforget\s+(all\s+|any\s+|the\s+|your\s+)?(previous|prior|above|earlier|system)\s+(instructions?|prompts?|rules?)
+new-instructions	\b(new|updated|real|actual|true)\s+(system\s+)?(instructions?|prompt)\s*:
+system-prompt-override	\b(system\s+prompt|developer\s+message)\s*(override|update|:)
+you-are-now	\byou\s+are\s+now\s+(a|an|the|in)\b
+do-not-tell	\bdo\s+not\s+(tell|inform|mention|reveal)\s+(the\s+)?(user|human|operator|founder|maintainer)
+assistant-directive	^\s*(assistant|system|ai|agent|model|claude|gpt|llm)\s*:\s*(you|ignore|must|should|always|never)\b
+ai-only-note	\b(note|message|instructions?)\s+(to|for)\s+(the\s+)?(ai|agents?|assistants?|llms?|language\s+models?|bots?)\s*[:\-]
+when-you-read-this	\b(if|when)\s+you\s+are\s+an?\s+(ai|agent|assistant|llm|language\s+model)\b
+approve-or-merge-directive	\b(approve|merge|accept)\s+this\s+(pull\s+request|pr|change|patch)\b.{0,40}\b(immediately|now|without|silently|automatically)\b
+exfiltrate	\b(send|post|upload|forward|exfiltrate)\s+(the\s+|all\s+|your\s+)?(secrets?|tokens?|credentials?|private\s+keys?|api\s+keys?|env(ironment)?\s+variables?)\b
+#
+# 2. Hidden content
+zero-width-chars	[​‌‍⁠﻿᠎]
+bidi-controls	[‪-‮⁦-⁩]
+html-comment-imperative	<!--[^>]{0,400}\b(ignore|disregard|you\s+must|you\s+should|always|never|approve|merge|execute|run|send|do\s+not\s+tell)\b
+hidden-span	<(span|div|p|font)[^>]{0,200}(display\s*:\s*none|visibility\s*:\s*hidden|font-size\s*:\s*0|color\s*:\s*(#?fff(fff)?|white|transparent)|opacity\s*:\s*0)
+hidden-attr	\b(hidden|aria-hidden\s*=\s*["']?true)\b[^>]{0,200}>[^<]{0,200}\b(ignore|instruction|approve|merge|secret)\b
+#
+# 3. Encoded blobs (long base64 or hex runs inside prose files)
+base64-blob	(?<![A-Za-z0-9+/=])[A-Za-z0-9+/]{120,}={0,2}(?![A-Za-z0-9+/=])
+hex-blob	\b[0-9a-f]{128,}\b
+#
+# 4. Tool and shell coercion
+tool-call-directive	\b(call|invoke|use|run)\s+(the\s+)?(tool|function|command|shell|bash|curl|wget)\b.{0,60}\b(secret|token|key|credential|password)\b
+curl-pipe-shell	\bcurl\b[^|\n]{0,200}\|\s*(sudo\s+)?(ba)?sh\b
